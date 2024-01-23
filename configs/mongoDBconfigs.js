@@ -5,7 +5,7 @@ const connectionString = "mongodb+srv://fluxstoreDB:zADkiIxwLZpWo1cd@cluster0.dx
 
 
 const connection = mongoose.connect(connectionString).then(()=>{
-    console.log("Conncetion successful")
+    console.log("Database Conncetion successful")
 }).catch((e)=>{
     console.log(e);
 })
