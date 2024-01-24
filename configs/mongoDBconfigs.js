@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
+const dotenv = require('dotenv');
+dotenv.config();
 
-
-const connectionString = "mongodb+srv://fluxstoreDB:zADkiIxwLZpWo1cd@cluster0.dxzadmr.mongodb.net/?retryWrites=true&w=majority";
+const connectionString = process.env.CONNECTION_STRING;
 
 
 const connection = mongoose.connect(connectionString).then(()=>{

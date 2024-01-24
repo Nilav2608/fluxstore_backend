@@ -1,7 +1,9 @@
 const app = require("./app");
-const connection = require("./configs/mongoDBconfigs");
+const databaseConfig = require("./configs/mongoDBconfigs");
+const dotenv = require('dotenv');
+dotenv.config();
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3001;
 
 
 app.listen(PORT,'0.0.0.0',()=>{
