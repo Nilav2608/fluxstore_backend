@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const connection = require('../configs/mongoDBconfigs');
+const database = require('../configs/mongoDBconfigs');
+const bcrypt = require('bcrypt');
 const  {Schema } = mongoose;
 
 
@@ -24,3 +25,29 @@ const userSchema = new Schema({
       },
   ],
 })
+
+userSchema.pre("save", async function () {
+    try {
+       var user = this;
+
+       if(!user.isModified('password')){
+          return next("Password is modified");
+       }
+       var salt = await bcrypt.genSalt(10);
+       var hashedPassword = await bcrypt.hash(user.password,salt);
+       user.password = hashedPassword;
+       return next("password is modified");
+
+    } catch (error) {
+      return next("error"); //
+    }
+})
+
+function next(data) {
+  console.log(data); 
+}
+
+
+const UserModel = database.model('users',userSchema);
+
+module.exports = UserModel;
