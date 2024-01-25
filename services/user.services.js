@@ -22,6 +22,42 @@ class UserServices{
             return false
         }
     }
+
+    static async loginUser(email,password){
+
+        try {
+            if (!(email && password)) {
+                return false;
+            }
+            const isUserExists = await UserModel.findOne({ email })
+            console.log(isUserExists)
+            if (isUserExists) {
+                const validPassword = await bcrypt.compare(password,isUserExists.password);
+                if (validPassword) {
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+                return false
+            }
+        } catch (error) {
+            console.log(error);
+            return false;
+        }
+    }
+
+    static async generateToken(tokenData,secretKey,expire){
+        return jwt.sign(tokenData,secretKey,{expiresIn:expire});
+    }
+
+    static async checkUser(email){
+        try {
+            return UserModel.findOne({email})
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }
 
 
