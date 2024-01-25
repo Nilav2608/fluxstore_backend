@@ -48,6 +48,6 @@ function next(data) {
 }
 
 
-const UserModel = database.model('users',userSchema);
+const UserModel = mongoose.model('users',userSchema,);
 
 module.exports = UserModel;
