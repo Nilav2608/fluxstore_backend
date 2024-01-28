@@ -11,7 +11,27 @@ const userSchema = new Schema({
         require : true
     },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
+    hashedPassword: { type: String, required: true },
+    address:{
+      street: {
+        type: String,
+      },
+      city: {
+        type: String,
+      },
+      state: {
+        type: String,
+      },
+      postalCode: {
+        type: String,
+      },
+      country: {
+        type: String,
+      },
+      phoneNumber: {
+        type: String,
+      },
+    },
     cartItems: [
        {
          productId: { type: Number, required: true },
@@ -30,12 +50,12 @@ userSchema.pre("save", async function () {
     try {
        var user = this;
 
-       if(!user.isModified('password')){
+       if(!user.isModified('hashedPassword')){
           return next("Password is modified");
        }
        var salt = await bcrypt.genSalt(10);
-       var hashedPassword = await bcrypt.hash(user.password,salt);
-       user.password = hashedPassword;
+       var hashedPassword = await bcrypt.hash(user.hashedPassword,salt);
+       user.hashedPassword = hashedPassword;
        return next("password is modified");
 
     } catch (error) {

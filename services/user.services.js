@@ -5,14 +5,14 @@ const jwt = require('jsonwebtoken');
 
 class UserServices{
 
-    static async registerUser(userName,email,password){
+    static async registerUser(userName,email,hashedPassword){
         try {
             const existingUser = await UserModel.findOne({ email });
             if (existingUser) {
                 console.log("Email is not unique");
                 return false;
             }else{
-                const createUser = new UserModel({userName,email,password});
+                const createUser = new UserModel({userName,email,hashedPassword});
                 await createUser.save();
                 console.log("Email is unique");
                 return true
@@ -32,7 +32,7 @@ class UserServices{
             const isUserExists = await UserModel.findOne({ email })
             console.log(isUserExists)
             if (isUserExists) {
-                const validPassword = await bcrypt.compare(password,isUserExists.password);
+                const validPassword = await bcrypt.compare(password,isUserExists.hashedPassword);
                 if (validPassword) {
                     return true;
                 }else{
