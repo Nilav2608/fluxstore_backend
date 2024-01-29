@@ -52,3 +52,42 @@ exports.addToCart = async (request,response,next)=>{
       });
       }
 }
+
+
+exports.deleteFromCart = async (request, response, next) => {
+    try {
+      const { docId, userId } = request.body;
+  
+      if (!docId || !userId) {
+        return response.status(400).json({
+          status: false,
+          message: "Invalid docId or userId",
+        });
+      }
+      const queries = {
+        id:docId,
+        userId: userId,
+      }
+      const cartDeletionSuccess = await CartServices.deleteFromCart(queries);
+  
+      if (cartDeletionSuccess) {
+        return response.status(200).json({
+          status: true,
+          message: "Product deleted successfully",
+        });
+      } else {
+        return response.status(404).json({
+          status: false,
+          message: "Cart item doesn't exist",
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      return response.status(500).json({
+        status: false,
+        message: "Internal Server Error",
+      });
+    }
+  };
+
+
