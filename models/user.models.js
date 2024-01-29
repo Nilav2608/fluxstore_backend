@@ -12,10 +12,16 @@ const userSchema = new Schema({
     },
     email: { type: String, required: true, unique: true },
     hashedPassword: { type: String, required: true },
-    // address:{
-    //   type: addressSchema,
-    //   required: false},
-
+    address:[
+      {
+        street: { type: String, required: true },
+        city: { type: String, required: true },
+        state: { type: String, required: true },
+        postalCode: { type: String, required: true },
+        country: { type: String, required: true },
+        phoneNumber: { type: String, required: true }
+      }
+    ]
 })
 
 userSchema.pre("save", async function () {
