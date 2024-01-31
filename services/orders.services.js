@@ -28,6 +28,26 @@ class OrderServices{
         }
     }
 
+
+    static async cancelUserOrder(docId,userId){
+        //find orders based on userID
+        const orderExists = await Orders.find({userId: userId});
+        //if the orders exists
+        console.log(orderExists);
+        if (orderExists) {
+            //then check the order based on orders object Id
+            const order = await Orders.findByIdAndUpdate(docId,{deliveryStatus:"CANCELLED"});
+            console.log(order);
+            if (order) {
+                return true;
+            } else {
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
+
 }
 
 module.exports = OrderServices;
