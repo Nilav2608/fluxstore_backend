@@ -68,9 +68,40 @@ exports.getMyOrders = async(request,response)=>{
        return response.status(404).json(
             {
                 status : false,
-                data : error
+                data : error.message
             }
         )
         
     }
 }        
+
+exports.cancelOrder = async (request,response)=>{
+
+    const {userId,docId} = request.body;
+
+    try {
+        if (!(userId && docId)) {
+            return response.status(400).json({
+                status: false,
+                message: "Invalid userId or docId",
+              });
+        }else{
+            const cancellationResult = await OrderServices.cancelUserOrder(docId,userId);
+            if (cancellationResult) {
+                return response.status(201).json({
+                    status: true,
+                    data: "order has been cancelled!"
+                  });
+            }else{
+                throw "Failed to get orders"
+            }
+        }
+    } catch (error) {
+        return response.status(404).json(
+            {
+                status : false,
+                data : error.message
+            }
+        )
+    }
+}
