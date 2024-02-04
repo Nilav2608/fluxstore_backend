@@ -5,6 +5,7 @@ const ordersController = require('../controllers/orders.controller');
 router.get('/getMyOrders',ordersController.getMyOrders);
 router.post('/newOrder',ordersController.newOrderRequest);
 router.post('/cancelOrder',ordersController.cancelOrder);
+router.post('/admin/updateDelivaryStatus',ordersController.updateDelivaryStatus);
 
 
 module.exports = router;
