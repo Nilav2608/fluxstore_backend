@@ -104,3 +104,33 @@ exports.cancelOrder = async (request,response)=>{
         )
     }
 }
+
+exports.updateDelivaryStatus = async (request,response)=>{
+
+    const {userId,docId,status} = request.body;
+    try {
+        if (!(userId && docId && status)) {
+            return response.status(400).json({
+                status: false,
+                message: "Invalid data",
+              });
+        }else{
+            const updationResult = await OrderServices.updateOrderDelivarStatus(userId,docId,status);
+            if (updationResult) {
+                return response.status(201).json({
+                    status: true,
+                    data: "order has been updated!"
+                  });
+            }else{
+                throw "Failed to get orders"
+            }
+        }
+    } catch (error) {
+        return response.status(404).json(
+            {
+                status : false,
+                data : error.message
+            }
+        )
+    }
+}
