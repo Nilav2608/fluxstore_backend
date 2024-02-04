@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const {cartItemsSchema} = require('./cart.model');
+const { Timestamp } = require('mongodb');
 const { Schema } = mongoose;
 
 
@@ -40,7 +41,7 @@ const ordersSchema = new Schema({
     total: { type: Number, required:true },
     paymentMethod: { type: String, required:true },
     deliveryStatus: { type: String,}
-});
+},{timestamps : true});
 
 const Orders = mongoose.model('Orders', ordersSchema);
 
