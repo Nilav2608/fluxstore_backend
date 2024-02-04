@@ -1,4 +1,4 @@
-const Cart = require("../models/cart.model");
+const {Cart} = require("../models/cart.model");
 
 
 
@@ -7,18 +7,20 @@ class CartServices{
 
     static async addToCart(cartData){
         try {
-            const cartAdded = await Cart({
-                userId: cartData.newUserId,
-                productId: cartData.newProductId,
-                productName: cartData.newProductName,
-                price: cartData.newPrice,
-                size: cartData.newSize,
-                color: cartData.newColor,
-                imageUrl: cartData.newImageUrl,
-                quantity: cartData.newQuantity,
-                selected: cartData.newSelected
-            });
-
+            // const cartAdded = await Cart({
+            //     userId: cartData.newUserId,
+            //     productId: cartData.newProductId,
+            //     productName: cartData.newProductName,
+            //     price: cartData.newPrice,
+            //     size: cartData.newSize,
+            //     color: cartData.newColor,
+            //     imageUrl: cartData.newImageUrl,
+            //     quantity: cartData.newQuantity,
+            //     selected: cartData.newSelected
+            // });
+            console.log("on serivices")
+            const cartAdded = await Cart(cartData);
+            console.log(cartAdded)
             await cartAdded.save().then((result) => {
                 console.log('Document inserted successfully:', result);
               })
