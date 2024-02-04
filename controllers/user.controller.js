@@ -1,5 +1,4 @@
 const UserServices = require("../services/user.services");
-const {request,response} = require('../app');
 const dotenv = require('dotenv');
 dotenv.config();
 

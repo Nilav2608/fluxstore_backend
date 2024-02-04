@@ -1,5 +1,4 @@
 const ProductCatalogServices = require("../services/product.services");
-const {request,response} = require('../app');
 
 
 

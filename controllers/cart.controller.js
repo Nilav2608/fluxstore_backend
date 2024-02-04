@@ -1,5 +1,4 @@
 const CartServices = require("../services/cart.services");
-const {request,response} = require('../app');
 
 
 
@@ -36,7 +35,8 @@ exports.addToCart = async (request,response,next)=>{
                newSelected :selected,
             }
             const cartSuccess = await CartServices.addToCart(mappedCartItems);
-            
+            console.log("method is intruded");
+            console.log(cartSuccess);
             if(cartSuccess){
                return response.status(201).json({
                    status: true,
