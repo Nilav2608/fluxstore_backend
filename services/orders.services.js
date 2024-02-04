@@ -48,6 +48,22 @@ class OrderServices{
         }
     }
 
+    static async updateOrderDelivarStatus(userId,docId,status){
+        //find orders based on userID
+        const orderExists = await Orders.findOne({ userId: userId, _id: docId });
+        //if the orders exists
+        if (orderExists) {
+            //then check the order based on orders object Id
+            const statusUpdated = await Orders.findByIdAndUpdate(docId, { deliveryStatus: status });
+            if (statusUpdated) {
+                return true;
+            } else {
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
 }
 
 module.exports = OrderServices;
