@@ -105,7 +105,7 @@ exports.cancelOrder = async (request,response)=>{
     }
 }
 
-exports.updateDelivaryStatus = async (request,response)=>{
+exports.updateDeliveryStatus = async (request,response)=>{
 
     const {userId,docId,status} = request.body;
     try {
@@ -115,8 +115,8 @@ exports.updateDelivaryStatus = async (request,response)=>{
                 message: "Invalid data",
               });
         }else{
-            const updationResult = await OrderServices.updateOrderDelivarStatus(userId,docId,status);
-            if (updationResult) {
+            const updatingResult = await OrderServices.updateOrderDeliveryStatus(userId,docId,status);
+            if (updatingResult) {
                 return response.status(201).json({
                     status: true,
                     data: "order has been updated!"
