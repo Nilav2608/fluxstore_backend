@@ -48,7 +48,7 @@ class OrderServices{
         }
     }
 
-    static async updateOrderDelivarStatus(userId,docId,status){
+    static async updateOrderDeliveryStatus(userId,docId,status){
         //find orders based on userID
         const orderExists = await Orders.findOne({ userId: userId, _id: docId });
         //if the orders exists
