@@ -35,7 +35,7 @@ class ProductCatalogServices{
                 if (createProduct) {
                     return true
                 }else{
-                    throw "Faild to insert data"
+                    throw "Failed to insert data"
                 }
 
         } catch (error) {

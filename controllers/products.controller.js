@@ -15,7 +15,7 @@ exports.getProducts = async(request,response,next)=>{
                 }
             )
         }else{
-            throw "Faild to get data"
+            throw "Failed to get data"
         }
     } catch (error) {
         response.status(404).json(
@@ -28,7 +28,7 @@ exports.getProducts = async(request,response,next)=>{
     }
 }
 
-//productName,imageUrl,price,descriptionn,ratings,sizes,colors,favorite
+//productName,imageUrl,price,description,ratings,sizes,colors,favorite
 
 exports.addProducts = async (request, response, next) => {
     const { productName, description, price, imageUrl, sizes, colors, favorite, ratings } = request.body;
