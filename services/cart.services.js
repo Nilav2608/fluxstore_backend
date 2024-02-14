@@ -5,7 +5,7 @@ const {Cart} = require("../models/cart.model");
 
 class CartServices{
 
-    static async addToCart(cartData){
+  static async addToCart(cartData){
         try {
             // const cartAdded = await Cart({
             //     userId: cartData.newUserId,
@@ -18,9 +18,7 @@ class CartServices{
             //     quantity: cartData.newQuantity,
             //     selected: cartData.newSelected
             // });
-            console.log("on serivices")
             const cartAdded = await Cart(cartData);
-            console.log(cartAdded)
             await cartAdded.save().then((result) => {
                 console.log('Document inserted successfully:', result);
               })
@@ -40,29 +38,42 @@ class CartServices{
         }
     }
 
+    static async getUserCartITems(userId){
+         const carITems = await Cart.find({userId : userId});
+         if (carITems) {
+             return carITems;
+         }else{
+          console.log("No data")
+          return [];
+         }
+    }
+
     static async deleteFromCart(data) {
-  try {
+        try {
     const itemExists = await Cart.find({
         _id: data.id
     //   email: data.userId
     });
+
     if (itemExists) {
+      //deleting cart items
       const deleteCartItem = await Cart.deleteOne({ _id: data.id });
+      const carITems = await Cart.find({userId : data.userId});
 
       if (deleteCartItem.deletedCount > 0) {
         console.log("Item removed from cart successfully");
-        return true;
+        return {"status":true, "cart" : carITems};
       } else {
         console.log("Failed to remove item from cart");
-        return false;
+        return {"status":false, "cart" : []};;
       }
     } else {
       console.log("Item not found in the cart");
-      return false;
+      return {"status":false, "cart" : []};
     }
   } catch (error) {
     console.error("Error deleting item from cart:", error.message);
-    return false;
+    return {"status":false, "cart" : []};;
   }
 }
 
