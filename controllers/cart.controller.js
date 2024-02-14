@@ -1,3 +1,4 @@
+const { request, response } = require("../app");
 const CartServices = require("../services/cart.services");
 
 
@@ -16,6 +17,7 @@ exports.addToCart = async (request,response,next)=>{
       } = request.body;
 
       const cartData = request.body;
+      console.log(cartData);
 //productName && !userId && !productId && !imageUrl && !price && !size && !color && !quantity && selected
 //productName || !userId || !productId || !imageUrl || !price || !size || !color || !quantity || selected === undefined
       try {
@@ -72,14 +74,16 @@ exports.deleteFromCart = async (request, response, next) => {
       }
       const cartDeletionSuccess = await CartServices.deleteFromCart(queries);
   
-      if (cartDeletionSuccess) {
+      if (cartDeletionSuccess['status']) {
         return response.status(200).json({
           status: true,
+          data: cartDeletionSuccess['cart'],
           message: "Product deleted successfully",
         });
       } else {
         return response.status(404).json({
           status: false,
+          data: cartDeletionSuccess['dacartta'],
           message: "Cart item doesn't exist",
         });
       }
@@ -87,9 +91,36 @@ exports.deleteFromCart = async (request, response, next) => {
       console.error(error);
       return response.status(500).json({
         status: false,
-        message: "Internal Server Error",
+        data: cartDeletionSuccess['cart'],
+        message: "Internal Server Error " + error.message,
       });
     }
   };
 
+
+  exports.getUserCartItems = async (request,response) => {
+      
+    const {userId} = request.body;
+
+    try {
+       if (!userId) {
+        return response.status(400).json({
+          status: false,
+          message: "Invalid userId",
+        });
+       }else{
+         const results = await CartServices.getUserCartITems(userId);
+         return response.status(200).json({
+          status: true,
+          data: results,
+        });  
+       }
+    } catch (error) {
+      console.error(error);
+      return response.status(500).json({
+        status: false,
+        message: "Internal Server Error",
+      });
+    }
+  }
 
