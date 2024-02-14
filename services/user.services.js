@@ -47,6 +47,12 @@ class UserServices{
         }
     }
 
+    static async getUserDetails(id){
+        const user = await UserModel.findById(id)
+        console.log(user);
+        return user;
+    }
+
     static async generateToken(tokenData,secretKey,expire){
         return jwt.sign(tokenData,secretKey,{expiresIn:expire});
     }
