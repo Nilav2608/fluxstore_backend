@@ -1,3 +1,4 @@
+const { generateOrderID, generateTrackingId } = require('../helpers/helpers');
 const Orders = require('../models/orders.model');
 
 
@@ -6,7 +7,9 @@ class OrderServices{
 
    
     static async newOrder(data){
-
+        data.orderID = generateOrderID();
+        data.trackingNumber = generateTrackingId("IK",9);
+        console.log(data.orderId);
         const order = await Orders(data);
         const results = await order.save(); 
         if (results) {
