@@ -76,20 +76,20 @@ exports.getMyOrders = async(request,response)=>{
 
 exports.cancelOrder = async (request,response)=>{
 
-    const {userId,docId} = request.body;
+    const {userId,orderId} = request.body;
 
     try {
-        if (!(userId && docId)) {
+        if (!(userId && orderId)) {
             return response.status(400).json({
                 status: false,
-                message: "Invalid userId or docId",
+                message: "Invalid userId or orderId",
               });
         }else{
-            const cancellationResult = await OrderServices.cancelUserOrder(docId,userId);
+            const cancellationResult = await OrderServices.cancelUserOrder(orderId,userId);
             if (cancellationResult) {
                 return response.status(201).json({
                     status: true,
-                    data: "order has been cancelled!"
+                    message: "order has been cancelled!"
                   });
             }else{
                 throw "Failed to get orders"
@@ -99,7 +99,7 @@ exports.cancelOrder = async (request,response)=>{
         return response.status(404).json(
             {
                 status : false,
-                data : error.message
+                message : error.message
             }
         )
     }

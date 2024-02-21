@@ -37,7 +37,7 @@ const ordersSchema = new Schema({
     quantity: { type: Number, required:true },
     orderedItems: { type: [cartItemsSchema], required:true },
     subTotal: { type: Number,required:true },
-    shippingCharges: { type: Number, required:true },
+    shippingCharges: { type: String, required:true },
     total: { type: Number, required:true },
     paymentMethod: { type: String, required:true },
     deliveryStatus: { type: String,}
