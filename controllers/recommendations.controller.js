@@ -44,7 +44,7 @@ exports.getRecommendations = async(request,response)=>{
 
     try {
         const successState = await RecommendationServices.getAllRecommendations();
-
+        
         if(successState){
             response.status(200).json(
                 {
