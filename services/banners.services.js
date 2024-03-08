@@ -7,9 +7,7 @@ class BannerServices{
 
     static async addBanners(bannerData){
         const addedResults = await Banner(bannerData);
-        await addedResults.save().then((result) => {
-            console.log('Document inserted successfully:', result);
-          })
+        await addedResults.save()
           .catch((error) => {
             console.error('Error inserting document:', error);
           });

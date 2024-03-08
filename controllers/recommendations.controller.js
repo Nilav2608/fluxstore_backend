@@ -6,17 +6,15 @@ const RecommendationServices = require("../services/recommendations.services");
 
 exports.recommendationsPostRequest = async(request,response) => {
     const product = request.body;
-    console.log(product)
     try {
         if (!product) {
-            console.log("on services")
             return response.status(400).json({
                 status: false,
                 message: "Invalid userId",
               });
         }else{
 
-            const newRequest = await RecommendationServices.addRecomendations(product);
+            const newRequest = await RecommendationServices.addRecommendations(product);
 
             if (newRequest) {
                 return response.status(201).json({

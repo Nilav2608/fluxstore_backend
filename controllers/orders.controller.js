@@ -51,7 +51,6 @@ exports.getMyOrders = async(request,response)=>{
                 message: "Invalid userId",
               });
         }else{
-            console.log(userId);
             const myOrdersData = await OrderServices.findUserOrders(userId);
 
             if (myOrdersData) {

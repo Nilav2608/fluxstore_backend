@@ -19,9 +19,7 @@ class CartServices{
             //     selected: cartData.newSelected
             // });
             const cartAdded = await Cart(cartData);
-            await cartAdded.save().then((result) => {
-                console.log('Document inserted successfully:', result);
-              })
+            await cartAdded.save()
               .catch((error) => {
                 console.error('Error inserting document:', error);
               });
@@ -29,7 +27,7 @@ class CartServices{
             if(cartAdded){
                 return true
             }else{
-                throw Error("Faild to add to cart")
+                throw Error("Failed to add to cart")
             }
         } catch (error) {
             console.log(error.message)
@@ -43,7 +41,6 @@ class CartServices{
          if (carITems) {
              return carITems;
          }else{
-          console.log("No data")
           return [];
          }
     }
@@ -61,14 +58,11 @@ class CartServices{
       const carITems = await Cart.find({userId : data.userId});
 
       if (deleteCartItem.deletedCount > 0) {
-        console.log("Item removed from cart successfully");
         return {"status":true, "cart" : carITems};
       } else {
-        console.log("Failed to remove item from cart");
         return {"status":false, "cart" : []};;
       }
     } else {
-      console.log("Item not found in the cart");
       return {"status":false, "cart" : []};
     }
   } catch (error) {

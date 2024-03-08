@@ -51,9 +51,7 @@ exports.addProducts = async (request, response, next) => {
           favorite: favorite,
         };
     
-        console.log("From front end");
         const successState = await ProductCatalogServices.addProduct(newProduct);
-        console.log(successState);
         if (successState) {
           return response.status(201).json({
             status: true,

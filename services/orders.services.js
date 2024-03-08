@@ -9,7 +9,6 @@ class OrderServices{
     static async newOrder(data){
         data.orderID = generateOrderID();
         data.trackingNumber = generateTrackingId("IK",9);
-        console.log(data.orderId);
         const order = await Orders(data);
         const results = await order.save(); 
         if (results) {
@@ -23,7 +22,6 @@ class OrderServices{
     static async findUserOrders(userId){
 
         const results = await Orders.find({userId: userId})
-        console.log(results)
         if (results.length > 0) {
             return results
         }else{
@@ -36,7 +34,6 @@ class OrderServices{
         //find orders based on userID
         const orderExists = await Orders.find({userId: userId});
         //if the orders exists
-        console.log(orderExists);
         if (orderExists) {
             //then check the order based on order Id
             const order = await Orders.updateOne(
@@ -45,7 +42,6 @@ class OrderServices{
                     $set:{deliveryStatus:"CANCELLED"}
                 }
             );
-            console.log(order);
             if (order) {
                 return true;
             } else {

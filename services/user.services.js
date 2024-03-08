@@ -9,12 +9,10 @@ class UserServices{
         try {
             const existingUser = await UserModel.findOne({ email });
             if (existingUser) {
-                console.log("Email is not unique");
                 return false;
             }else{
                 const createUser = new UserModel({userName,email,hashedPassword});
                 await createUser.save();
-                console.log("Email is unique");
                 return true
             }
         } catch (error) {
@@ -30,7 +28,6 @@ class UserServices{
                 return false;
             }
             const isUserExists = await UserModel.findOne({ email })
-            console.log(isUserExists)
             if (isUserExists) {
                 const validPassword = await bcrypt.compare(password,isUserExists.hashedPassword);
                 if (validPassword) {
@@ -49,7 +46,6 @@ class UserServices{
 
     static async getUserDetails(id){
         const user = await UserModel.findById(id)
-        console.log(user);
         return user;
     }
 

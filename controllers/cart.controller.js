@@ -17,7 +17,6 @@ exports.addToCart = async (request,response,next)=>{
       } = request.body;
 
       const cartData = request.body;
-      console.log(cartData);
 //productName && !userId && !productId && !imageUrl && !price && !size && !color && !quantity && selected
 //productName || !userId || !productId || !imageUrl || !price || !size || !color || !quantity || selected === undefined
       try {
@@ -39,8 +38,6 @@ exports.addToCart = async (request,response,next)=>{
                newSelected :selected,
             }
             const cartSuccess = await CartServices.addToCart(cartData);
-            console.log("method is intruded");
-            console.log(cartSuccess);
             if(cartSuccess){
                return response.status(201).json({
                    status: true,

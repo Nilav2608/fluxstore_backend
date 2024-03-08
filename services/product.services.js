@@ -25,9 +25,7 @@ class ProductCatalogServices{
                     colors:newData.colors,
                     favorite:newData.favorite
                 })
-                await createProduct.save().then((result) => {
-                    console.log('Document inserted successfully:', result);
-                  })
+                await createProduct.save()
                   .catch((error) => {
                     console.error('Error inserting document:', error);
                   });
