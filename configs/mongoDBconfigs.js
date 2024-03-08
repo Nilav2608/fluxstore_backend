@@ -6,7 +6,7 @@ const connectionString = process.env.CONNECTION_STRING;
 
 
 const connection = mongoose.connect(connectionString).then(()=>{
-    console.log("Database Conncetion successful")
+    console.log("Database Connection successful")
 }).catch((e)=>{
     console.log(e);
 })
