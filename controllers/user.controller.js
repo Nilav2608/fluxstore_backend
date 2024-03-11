@@ -65,8 +65,7 @@ exports.login = async (request,response)=>{
                 email: user.email
             };
             const secretKey = process.env.SECRET_KEY;
-            const expiry = process.env.EXPIRY;
-            const generatedToken = await UserServices.generateToken(tokenData,secretKey,expiry);
+            const generatedToken = await UserServices.generateToken(tokenData,secretKey,'14d');
             return response.status(201).json({
                 status:true,
                 token: generatedToken,
