@@ -1,4 +1,5 @@
 const { generateOrderID, generateTrackingId } = require('../helpers/helpers');
+const { Cart } = require('../models/cart.model');
 const Orders = require('../models/orders.model');
 
 
@@ -10,8 +11,12 @@ class OrderServices{
         data.orderID = generateOrderID();
         data.trackingNumber = generateTrackingId("IK",9);
         const order = await Orders(data);
-        const results = await order.save(); 
+        const results = await order.save();
+
         if (results) {
+            for(var item of data.orderedItems){
+                await Cart.findByIdAndDelete(item._id);
+            }
             return true
         }else{
             return false
