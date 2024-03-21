@@ -1,6 +1,6 @@
 # Fluxstore Backend
 
-Fluxstore Backend is the backend server for the [Fluxstore E-commerce app](https://github.com/Nilav2608/fluxestore_E-commerce), providing APIs for managing products, orders, users, and other resources.
+Fluxstore Backend is the express backend server for the [Fluxstore E-commerce app](https://github.com/Nilav2608/fluxestore_E-commerce), providing APIs for managing products, orders, users, and other resources.
 
 ## Architecture Model-View-Controller(MVC)
 
