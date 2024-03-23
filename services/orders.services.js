@@ -27,7 +27,6 @@ class OrderServices{
     static async findUserOrders(userId){
 
         const results = await Orders.find({userId: userId})
-        console.log(results)
         if (results.length >= 0) {
             return results
         }else{
