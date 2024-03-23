@@ -49,32 +49,3 @@ function next(data) {
 const UserModel = mongoose.model('users',userSchema,);
 
 module.exports = UserModel;
-
-
-
- //   type: {
-    //     street: {
-    //         type: String,
-    //         required: true
-    //     },
-    //     city: {
-    //         type: String,
-    //         required: true
-    //     },
-    //     state: {
-    //         type: String,
-    //         required: true
-    //     },
-    //     postalCode: {
-    //         type: String,
-    //         required: true
-    //     },
-    //     country: {
-    //         type: String,
-    //         required: true
-    //     },
-    //     phoneNumber: {
-    //         type: String,
-    //         required: true
-    //     },
-    // },
