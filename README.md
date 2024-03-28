@@ -9,7 +9,7 @@ Fluxstore Backend is the express backend server for the [Fluxstore E-commerce ap
 - **Product Management**: CRUD operations for managing product details such as name, description, price, etc.
 - **Order Management**: APIs for creating, updating, and retrieving orders placed by users.
 - **User Management**: Endpoints for user authentication, registration, and profile management.
-- **Authentication**: Secure authentication using JSON Web Tokens (JWT).
+- **Authentication**: Secure authentication using JSON Web Token (JWT).
 - **Database Integration**: Integration with MongoDB database for storing and retrieving data.
 - **Scalability**: Built with Node.js and Express.js, providing scalability and performance.
 
